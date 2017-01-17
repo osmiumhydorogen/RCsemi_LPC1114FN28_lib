@@ -67,3 +67,18 @@ namespace RCsemi
 	TickingEntry* TickingEntry::last_ = 0;
 	TickingEntry* TickingEntry::origin_ = 0;
 }
+
+extern "C"
+{
+void TIMER16_0_IRQHandler()
+{
+	if(LPC_TMR16B0->IR & 0x1)
+	{
+		LPC_TMR16B0->IR |= 0x1;
+
+		RCsemi::TickingEntry::Tick();
+
+	}
+}
+
+}

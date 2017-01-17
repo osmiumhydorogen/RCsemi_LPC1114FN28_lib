@@ -7,7 +7,7 @@
 
 #ifndef INCLUDE_PSPAD_HPP_
 #define INCLUDE_PSPAD_HPP_
-
+#include <stdint.h>
 namespace RCsemi
 {
 

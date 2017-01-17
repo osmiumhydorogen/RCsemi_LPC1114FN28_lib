@@ -8,7 +8,7 @@
 #ifndef INCLUDE_PWMMOTOR_HPP_
 #define INCLUDE_PWMMOTOR_HPP_
 
-#include <RCsemiCommon/inc/motor.hpp>
+#include <../RCsemiCommon/inc/motor.hpp>
 #include <RCsemi_typedef.hpp>
 #include <rcsemi_ticking_entry.hpp>
 #include <GPIO_struct.h>

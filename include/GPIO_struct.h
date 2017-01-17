@@ -20,7 +20,7 @@ typedef struct GPIOMask_t
 	uint32_t mask;
 #ifdef __cplusplus
 	GPIOMask_t();
-	GPIOMask_t(uint32_t port,uint32_t mask);
+	GPIOMask_t(uint32_t port,uint32_t pin);
 } gpioMask_t;
 #endif
 

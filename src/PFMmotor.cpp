@@ -8,7 +8,7 @@
 #include <GPIO_struct.h>
 #include <PFMmotor.hpp>
 #include <RCsemi_typedef.hpp>
-#include <motor.hpp>
+#include <../RCsemiCommon/inc/motor.hpp>
 
 
 namespace RCsemi

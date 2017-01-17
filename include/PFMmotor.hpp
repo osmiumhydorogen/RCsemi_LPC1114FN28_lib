@@ -9,7 +9,7 @@
 
 #include <LPC11xx.h>
 #include <RCsemi_typedef.hpp>
-#include <RCsemiCommon/inc/motor.hpp>
+#include <../RCsemiCommon/inc/motor.hpp>
 #include <rcsemi_ticking_entry.hpp>
 #include <GPIO_struct.h>
 #include <vector>
