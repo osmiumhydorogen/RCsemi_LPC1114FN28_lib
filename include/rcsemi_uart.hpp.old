@@ -1,0 +1,45 @@
+/*
+ * uartClass.hpp
+ * ver. 0.2
+ *
+ *  Created on: 2016/09/02
+ *      Author: osmium
+ */
+
+#ifndef INCLUDE_UARTCLASS_HPP_
+#define INCLUDE_UARTCLASS_HPP_
+
+#include <LPC11xx.h>
+
+namespace RCsemi
+{
+
+	class UARTPort
+	{
+	private:
+		LPC_UART_TypeDef* port;
+	protected:
+	public:
+		enum uart_mode
+		{
+			UCHAR_RAW,
+			IM315XX  ,
+		};
+		static void uchar2ascii(unsigned char inByte,char inAscii[2]);
+		static int ascii2uchar(unsigned char& inByte,char inAscii[2]);
+		UARTPort(LPC_UART_TypeDef* newPort);
+		int       setBaud(int PCLK,int BR);
+		UARTPort& operator<<(const uint8_t byte);
+		UARTPort& operator<<(const char*  bytesInChar);
+		UARTPort& operator>>(uint8_t& byte);
+		UARTPort& operator>>(char*    str);
+	};
+}
+
+
+
+
+
+
+
+#endif /* INCLUDE_UARTCLASS_HPP_ */
