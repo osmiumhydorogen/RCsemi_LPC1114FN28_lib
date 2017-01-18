@@ -6,9 +6,9 @@
  */
 #include <LPC11xx.h>
 #include <RCsemi_typedef.hpp>
+#include <../RCsemiCommon/inc/ringbuf.hpp>
 #include <uart_port.hpp>
 #include <math.h>
-#include <RCsemiCommon/inc/ringbuf.hpp>
 
 namespace RCsemi
 {
@@ -97,7 +97,7 @@ int UARTPort::SetBaud(int PCLK,int BR)
 		return 0;
 
 }
-RingBuf* uart_port_bufs::UARTRcvBuf0 = 0;
+
 }
 
 extern "C"
@@ -109,7 +109,7 @@ void UART_IRQHandler(void)
 	{
 		if(UARTRcvBuf0)
 		{
-			UARTRcvBuf0->PushData(LPC_UART->RBR);
+			UARTRcvBuf0->PushData((uint8_t)(LPC_UART->RBR));
 		}
 	}
 }

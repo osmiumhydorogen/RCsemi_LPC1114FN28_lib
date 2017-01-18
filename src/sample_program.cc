@@ -5,6 +5,7 @@
 
 // ----------------------------------------------------------------------------
 
+#define BUILD_4_SAMPLE
 #ifdef BUILD_4_SAMPLE
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -23,7 +24,7 @@ const uint32_t MOTOR_MASK2 = (0x1 << 2);
 int duty;
 
 //#define BUILD_4_SAMPLE
-//#define PFM_MOTOR_SAMPLE
+#define PFM_MOTOR_SAMPLE
 //#define PWM_MOTOR_SAMPLE
 //#define PSPAD_SAMPLE
 //#define UART_PORT_SAMPLE
@@ -40,7 +41,7 @@ main (int argc, char* argv[])
 	LPC_GPIO0->DATA &= ~(MOTOR_MASK1 | MOTOR_MASK2);
 
 	//A出力をport0 pin 3,B出力を同pin2とするPFMのモーターを宣言
-	RCsemi::motor*   motor0;
+	RCsemi::Motor*   motor0;
 	motor0 = new RCsemi::PFMmotor(RCsemi::GPIOMask_t(0,3),RCsemi::GPIOMask_t(0,2));
 
 	//タイマーを初期化
@@ -67,7 +68,7 @@ main (int argc, char* argv[])
 	LPC_GPIO0->DATA &= ~(MOTOR_MASK1 | MOTOR_MASK2);
 
 	//A出力をport0 pin 3,B出力を同pin2とするPFMのモーターを宣言
-	RCsemi::motor*   motor0;
+	RCsemi::Motor*   motor0;
 	motor0 = new RCsemi::PWMmotor(RCsemi::GPIOMask_t(0,3),RCsemi::GPIOMask_t(0,2));
 
 	//タイマーを初期化

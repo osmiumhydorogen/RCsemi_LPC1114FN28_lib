@@ -37,10 +37,10 @@ namespace RCsemi
 		return Duty;
 	}
 
-	int PWMmotor::brake()
+	bool PWMmotor::brake()
 	{
 		is_brake_ = true;
-		return 0;
+		return true;
 	}
 
 	int PWMmotor::getCurrentDuty()

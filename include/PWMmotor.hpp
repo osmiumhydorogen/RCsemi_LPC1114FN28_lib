@@ -36,7 +36,7 @@ namespace RCsemi
 	public:
 		PWMmotor(gpioMask_t p1,gpioMask_t p2);
 		int drive(int Duty);
-		int brake();
+		bool brake();
 		int getCurrentDuty();
 		void _tick();
 	};

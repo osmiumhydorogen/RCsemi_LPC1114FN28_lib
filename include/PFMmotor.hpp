@@ -38,52 +38,9 @@ namespace RCsemi
 		PFMmotor(gpioMask_t p1,gpioMask_t p2);
 		int drive(int duty);
 		int getCurrentDuty();
-		int brake();
+		bool brake();
 
 		void _tick();
 	};
-
-	/*
-	namespace PFMmotor_globalValues
-	{
-		//extern PFMmotor* PFMmotorList[20];
-
-		class PFMMotorList
-		{
-		private:
-			static PFMMotorList* origin_;
-			PFMMotorList* next_;
-			static PFMMotorList* last_;
-			Motor*        motor_;
-		public:
-			PFMMotorList();
-			PFMMotorList(Motor* M);
-
-
-			inline void origin(PFMMotorList* new_origin)
-			{
-				origin_ = new_origin;
-			}
-
-			inline PFMMotorList* origin() const
-			{
-				return origin_;
-			}
-
-			inline PFMMotorList* next() const
-			{
-				return next_;
-			}
-
-			inline Motor* motor()
-			{
-				return motor_;
-			}
-			static void Append(Motor* motor);
-
-			static void Tick();
-		};
-	}
-	*/
 }
 #endif /* INCLUDE_PFMMOTOR_HPP_ */

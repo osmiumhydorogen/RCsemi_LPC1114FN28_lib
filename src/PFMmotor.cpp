@@ -45,10 +45,10 @@ namespace RCsemi
 		return currentDuty;
 	}
 
-	int PFMmotor::brake()
+	bool PFMmotor::brake()
 	{
 		isBrake = true;
-		return 0;
+		return true;
 	}
 
 	void PFMmotor::_tick()

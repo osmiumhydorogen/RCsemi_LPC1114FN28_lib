@@ -9,7 +9,7 @@
 #define INCLUDE_UART_PORT_HPP_
 
 #include <LPC11xx.h>
-#include <rcsemi_ringbuf.hpp>
+#include <../RCsemiCommon/inc/ringbuf.hpp>
 #include <RCsemi_typedef.hpp>
 #include <stdint.h>
 
@@ -23,7 +23,7 @@ namespace uart_port_conf
 
 namespace uart_port_bufs
 {
-	extern static RingBuf* UARTRcvBuf0;
+	static RingBuf* UARTRcvBuf0 = 0;
 }
 
 class UARTPort
