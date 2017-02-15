@@ -16,6 +16,8 @@ UARTPort::UARTPort(UARTPort::PortList prt)
 {
 	using namespace uart_port_bufs;
 	using namespace uart_port_conf;
+	timeout_10usec_ = 0;
+	timer_ = SystemTimer::getObject();
 	switch(prt)
 	{
 	case UART0:
@@ -37,10 +39,13 @@ int UARTPort::Recieve(uint8_t* data,const int max)
 {
 	int i=0;
 	int ptr=0,recieved_bytes_num = 0;
+	unsigned int start_time = timer_->counter();
 	for(i=0;recieved_bytes_num < max;i++)
 	{
 		recieved_bytes_num += buf_->GetData(data+ptr,max-recieved_bytes_num);
 		ptr = recieved_bytes_num;
+		if((timer_->counter()-start_time) >= timeout_10usec_)
+			break;
 	}
 	return recieved_bytes_num;
 }
@@ -96,6 +101,11 @@ int UARTPort::SetBaud(int PCLK,int BR)
 
 		return 0;
 
+}
+
+int UARTPort::setTimeout(int timeout_10usec)
+{
+	return timeout_10usec_ = timeout_10usec;
 }
 
 }

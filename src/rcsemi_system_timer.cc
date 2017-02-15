@@ -9,17 +9,22 @@
 namespace RCsemi
 {
 
+SystemTimer::SystemTimer()
+{
+}
+
 void SystemTimer::_tick()
 {
 	++counter_;
 }
 
-void SystemTimer::initialize()
+SystemTimer* SystemTimer::getObject()
 {
 	if(!object_)
 	{
 		object_ = new SystemTimer;
 	}
+	return object_;
 }
-
+unsigned int SystemTimer::counter_ = 0;
 }

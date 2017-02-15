@@ -16,10 +16,11 @@ namespace RCsemi
 class SystemTimer : public TickingObject
 {
 private:
-	static int counter_;
+	SystemTimer();
+	static unsigned int counter_;
 	static SystemTimer* object_;
 public:
-	static void initialize();
+	static SystemTimer* getObject();
 
 	static inline int counter()
 	{

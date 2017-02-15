@@ -2,7 +2,7 @@
 // This file is part of the GNU ARM Eclipse distribution.
 // Copyright (c) 2014 Liviu Ionescu.
 //
-
+//modified by osmiumhydorogen
 // ----------------------------------------------------------------------------
 
 #define BUILD_4_SAMPLE

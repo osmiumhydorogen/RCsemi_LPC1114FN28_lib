@@ -18,7 +18,7 @@ namespace RCsemi
 
 namespace uart_port_conf
 {
-	const uint32_t kBufSize = 32;
+	const uint32_t kBufSize = 64;
 }
 
 namespace uart_port_bufs
@@ -30,6 +30,8 @@ class UARTPort
 {
 private:
 	RingBuf* buf_;
+	SystemTimer* timer_;
+	int timeout_10usec_;
 public:
 	enum PortList
 	{
@@ -37,6 +39,7 @@ public:
 	};
 	UARTPort(PortList prt);
 	LPC_UART_TypeDef* port_;
+	int setTimeout(int timeout_10usec);
 	int SetBaud(int PCLK,int BR);
 	int Send(const uint8_t* data,const int num);
 	int Recieve(uint8_t* data,const int max);
