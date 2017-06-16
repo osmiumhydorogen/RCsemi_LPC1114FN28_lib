@@ -5,7 +5,7 @@
  *      Author: osmium
  */
 
-#include <rcsemi_system_timer.hpp>
+#include "../rcsemi_lib/inc/rcsemi_system_timer.hpp"
 namespace RCsemi
 {
 
@@ -27,4 +27,5 @@ SystemTimer* SystemTimer::getObject()
 	return object_;
 }
 unsigned int SystemTimer::counter_ = 0;
+SystemTimer* SystemTimer::object_  = 0;
 }

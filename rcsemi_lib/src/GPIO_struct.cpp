@@ -5,7 +5,7 @@
  *      Author: osmium
  */
 
-#include <GPIO_struct.h>
+#include "../rcsemi_lib/inc/GPIO_struct.h"
 
 #ifdef __cplusplus
 namespace RCsemi

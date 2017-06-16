@@ -7,6 +7,8 @@
 
 #ifndef INCLUDE_CAN_BUS_HPP_
 #define INCLUDE_CAN_BUS_HPP_
+
+#include <stdint.h>
 namespace RCsemi
 {
 
@@ -22,6 +24,7 @@ private:
 	CAN_BUS();
 public:
 	int sendFrame(CAN_Frame_t frame);
+	int recieveFrame();
 	CAN_BUS* getObject(int port_number);
 };
 

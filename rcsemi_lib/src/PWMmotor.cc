@@ -5,8 +5,9 @@
  *      Author: osmium
  */
 
+#include "../rcsemi_lib/inc/PWMmotor.hpp"
+
 #include <LPC11xx.h>
-#include <PWMmotor.hpp>
 
 namespace RCsemi
 {
@@ -26,20 +27,22 @@ namespace RCsemi
 
 		current_duty_ = 0;
 		is_brake_ = false;
+		to_brake_ = false;
 		motor_tick_count_ = 0;
 		update_timer_     = 0;
 	}
 
 	int PWMmotor::drive(int Duty)
 	{
-		is_brake_ = false;
+		to_brake_ = false;
 		current_duty_ = Duty;
 		return Duty;
 	}
 
 	bool PWMmotor::brake()
 	{
-		is_brake_ = true;
+		current_duty_ = 0;
+		to_brake_ = true;
 		return true;
 	}
 
@@ -54,13 +57,20 @@ namespace RCsemi
 		if(!update_timer_)
 		{
 			update_timer_ = period_per_cent_tick;
-			if(motor_tick_count_ < 100)
+			if(motor_tick_count_ != 100)
 			{
 				motor_tick_count_++;
-				if(is_brake_)
+				if((motor_tick_count_ == current_duty_) || (motor_tick_count_ == -current_duty_))
+				{
+					port1->DATA &= ~(pin1_.mask);
+					port2->DATA &= ~(pin2_.mask);
+					is_brake_ = false;
+				}
+				else if(to_brake_ && !is_brake_)
 				{
 					if((port1->DATA & pin1_.mask) || (port2->DATA & pin2_.mask))
 					{
+						update_timer_ = PWMDelayTick;
 						port1->DATA &= ~(pin1_.mask);
 						port2->DATA &= ~(pin2_.mask);
 					}
@@ -68,28 +78,13 @@ namespace RCsemi
 					{
 						port1->DATA |= (pin1_.mask);
 						port2->DATA |= (pin2_.mask);
-					}
-				}
-				else if(current_duty_ < 0)
-				{
-					if(motor_tick_count_ > -current_duty_)
-					{
-						port1->DATA &= ~(pin1_.mask);
-						port2->DATA &= ~(pin2_.mask);
-					}
-				}
-				else if(current_duty_ > 0)
-				{
-					if(motor_tick_count_ > current_duty_)
-					{
-						port2->DATA &= ~(pin2_.mask);
-						port1->DATA &= ~(pin1_.mask);
+						is_brake_ = true;
 					}
 				}
 			}
+			//if(motor_tick_count_ != 100)
 			else
 			{
-				motor_tick_count_ = 0;
 				if(current_duty_ < 0)
 				{
 					if(port1->DATA & pin1_.mask)
@@ -102,7 +97,9 @@ namespace RCsemi
 					{
 						port1->DATA &= ~(pin1_.mask);
 						port2->DATA |= (pin2_.mask);
+						motor_tick_count_ = 0;
 					}
+					is_brake_ = false;
 				}
 				else if(current_duty_ > 0)
 				{
@@ -116,14 +113,16 @@ namespace RCsemi
 					{
 						port2->DATA &= ~(pin2_.mask);
 						port1->DATA |= (pin1_.mask);
+						motor_tick_count_ = 0;
 					}
+					is_brake_ = false;
 				}
-				else
+				else if(!is_brake_)
 				{
 						port2->DATA &= ~(pin2_.mask);
 						port1->DATA &= ~(pin1_.mask);
 				}
-
+				else	motor_tick_count_ = 1;
 			}
 		}
 		else

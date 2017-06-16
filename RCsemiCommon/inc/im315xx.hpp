@@ -7,22 +7,26 @@
 
 #ifndef INC_IM315XX_HPP_
 #define INC_IM315XX_HPP_
-
+#include <stdint.h>
 namespace RCsemi
 {
-typedef struct IM315xxPacket_t_
+typedef union IM315xxPacket_t_
 {
+	uint8_t byte[12];
+	struct
+	{
 	uint8_t node;
-	uint16_t id;
+	uint16_t id ;
 	uint8_t rssi;
 	uint8_t data[8];
+	} __attribute__ ((packed)) by_name;
 }IM315xxPacket_t;
 
 class IM315xx_device
 {
 public:
 	/*
-	 * bytesの中身をIM315TX,TRXで送る.bytesの中身はバイナリでおｋ
+	 * packetの中身をIM315TX,TRXで送る.
 	 * 返り値:
 	 * 	エラーステータス
 	 * 	0:成功 1:IM315RXだった 負の値はその他
@@ -33,7 +37,7 @@ public:
 	 * IM315RX,TRXに送られてきたデータをバイナリに戻してbytesに格納する
 	 * 返り値：
 	 * 	エラーステータス
-	 * 	0:成功 1:IM315TXだった 2:タイムアウト 負の値はその他
+	 * 	0:成功 1:IM315TXだった 2:タイムアウト 3:データがおかしい 負の値はその他
 	 */
 	virtual int recievePacket(IM315xxPacket_t* packet) = 0;
 

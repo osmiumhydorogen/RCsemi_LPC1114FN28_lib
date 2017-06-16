@@ -22,7 +22,7 @@ private:
 public:
 	static SystemTimer* getObject();
 
-	static inline int counter()
+	static inline unsigned int counter()
 	{
 		return counter_;
 	}

@@ -27,6 +27,7 @@ namespace RCsemi
 		tickVal_t update_timer_;
 		int current_duty_;
 		bool is_brake_;
+		bool to_brake_;
 		gpioMask_t pin1_;
 		gpioMask_t pin2_;
 

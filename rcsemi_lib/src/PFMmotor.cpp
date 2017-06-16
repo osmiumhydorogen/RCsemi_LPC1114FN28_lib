@@ -5,10 +5,11 @@
  *      Author: osmium
  */
 
-#include <GPIO_struct.h>
-#include <PFMmotor.hpp>
-#include <RCsemi_typedef.hpp>
+#include "../rcsemi_lib/inc/PFMmotor.hpp"
+
 #include <../RCsemiCommon/inc/motor.hpp>
+#include "../rcsemi_lib/inc/GPIO_struct.h"
+#include "../rcsemi_lib/inc/RCsemi_typedef.hpp"
 
 
 namespace RCsemi

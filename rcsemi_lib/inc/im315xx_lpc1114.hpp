@@ -11,13 +11,14 @@
 #include <im315xx.hpp>
 #include <rcsemi_system_timer.hpp>
 #include <uint8_ascii_converter.hpp>
+#include <uart_port.hpp>
 
 namespace RCsemi
 {
 
 	namespace IM315xx_conf
 	{
-		const int timeout_ms = 2;
+		const int timeout_ms = 10;
 	}
 
 class IM315xx : public IM315xx_device
@@ -25,14 +26,16 @@ class IM315xx : public IM315xx_device
 private:
 	IM315xx();
 	Uint8AsciiConverter& u8_ascii_conv;
-	UARTPort port;
-	IM315xx* object_;
+	UARTPort& port_;
+	static IM315xx* object_;
 	SystemTimer* timer_;
 public:
 	int sendPacket(const IM315xxPacket_t& packet);
 	int recievePacket(IM315xxPacket_t* packet);
 	static IM315xx* getObject();
+	static void destroyObject();
 };
 }
+
 
 #endif /* INCLUDE_IM315XX_LPC1114_HPP_ */

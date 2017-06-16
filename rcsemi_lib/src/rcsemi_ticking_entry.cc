@@ -4,8 +4,9 @@
  *  Created on: 2016/10/13
  *      Author: osmium
  */
+#include "../rcsemi_lib/inc/rcsemi_ticking_entry.hpp"
+
 #include <LPC11xx.h>
-#include <rcsemi_ticking_entry.hpp>
 
 namespace RCsemi
 {
